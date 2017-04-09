@@ -15,7 +15,7 @@ class PDF extends \fpdf\FPDF
 	    // Select Arial italic 8
 	    $this->SetFont('Arial','I',8);
 	    // Print centered page number
-	    $this->Cell(0,10,'Printed By BosSTAN | '.$this->PageNo().'/{nb}',0,0,'R');
+	    $this->Cell(0,10,'Printed By Simoku | '.$this->PageNo().'/{nb}',0,0,'R');
 	}
 
 }
@@ -152,7 +152,7 @@ $pdf->ln();
 
 // Tabel
 
-$w = [10,67,40,92,25]; // Tentukan width masing-masing kolom
+$w = [15,80,48,100,25]; // Tentukan width masing-masing kolom
  
 $pdf->SetFont('Arial','B',10);
 $pdf->SetXY($left,$pdf->getY());
@@ -163,6 +163,19 @@ $pdf->Cell($w['3'],11,'Hasil Output yang diharapkan','LTR',0,'C');
 $pdf->Cell($w['4'],11,'Jam PPM','LTR',0,'C');
 
 $pdf->ln();
+
+$pdf->SetFont('Arial','B',10);
+$pdf->SetXY($left,$pdf->getY());
+$pdf->Cell($w['0'],11,' ','LTB',0,'C');
+$pdf->Cell($w['1'],11,'  ','LTRB',0,'C');
+$pdf->Cell($w['2'],11,'  ','LTRB',0,'C');
+$pdf->Cell($w['3'],11,'  ','LTRB',0,'C');
+$pdf->Cell($w['4'],11,'  ','LTRB',0,'C');
+
+$pdf->ln();
+
+
+
 
 // Prepare variabel for our loop
 $y1 = $pdf->GetY(); // Untuk baris berikutnya
@@ -193,7 +206,17 @@ $i = 1;
     //$pdf->ln();
 //}
 
+//Menampilkan jumlah halaman terakhir
+$pdf->SetFont('Arial','B',10);
+$pdf->setxy($left,$pdf->getY());
+$pdf->Cell($w['0'],6,'','LB');
+$pdf->Cell($w['1'],6,'','B',0,'C');
+$pdf->Cell($w['2'],6,'','B',0,'C');
+$pdf->Cell($w['3'],6,'JUMLAH','B',0,'C');
+$pdf->Cell($w['4'],6,number_format($angker, 3, ',', '.'),'BR',0,'R');
+// $pdf->Cell($w['5'],6,'','BR',0,'C');
 
+$pdf->ln();
 
 
 $pdf->ln();
