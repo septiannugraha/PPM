@@ -18,6 +18,10 @@ Thumbs.db
 # composer vendor dir
 _protected/vendor
 
+#db-local and db.php must not change
+_protected/config/db.php
+_protected/config/db-sispedap-local.php
+
 # composer itself is not needed
 composer.phar
 

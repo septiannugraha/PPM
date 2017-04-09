@@ -2,6 +2,8 @@ SIMOKU - Renbang
 ===============================
 
 Created by [@hoaaah](http://belajararief.com)
+            Septian
+            Dzul
 
 
 INSTALLATION
@@ -24,7 +26,7 @@ composer update
 You can access your app in webroot directory
 
 ~~~
-http://localhost/app/webroot/
+http://localhost/your_app/
 ~~~
 
 ### Postinstallation setup
@@ -36,12 +38,24 @@ After you get an apache alias, don't forget set your params too in app/config/pa
 
 ### Database
 
-Edit the file `config/db-local.php` with real data, for example:
+Edit the file `config/db.php` with real data, for example:
 
 ```php
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=yii2app',
+    'username' => 'root',
+    'password' => '1234',
+    'charset' => 'utf8',
+];
+```
+
+This app is using 2 database, previous database are for this app itself, and second database for generate Pegawai. Edit the file `config/db-sispedap-local.php` with real data, for example:
+
+```php
+return [
+    'class' => 'yii\db\Connection',
+    'dsn' => 'mysql:host=localhost;dbname=dbsispedap',
     'username' => 'root',
     'password' => '1234',
     'charset' => 'utf8',
