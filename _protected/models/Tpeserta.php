@@ -34,6 +34,7 @@ class Tpeserta extends \yii\db\ActiveRecord
         return [
             [['ppm_id', 'peran_id'], 'integer'],
             [['keterangan', 'pegawai_id'], 'string', 'max' => 255],
+            ['pegawai_id', 'unique', 'targetAttribute' => ['ppm_id', 'pegawai_id'], 'message' => 'Pegawai ini sudah menghadiri PPM ini.'],
             // [['peran_id'], 'exist', 'skipOnError' => true, 'targetClass' => RperanPpm::className(), 'targetAttribute' => ['peran_id' => 'id']],
             // [['pegawai_id'], 'exist', 'skipOnError' => true, 'targetClass' => RefPegawai::className(), 'targetAttribute' => ['pegawai_id' => 'id']],
         ];
