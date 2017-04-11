@@ -158,7 +158,7 @@ class PelaporanunitController extends Controller
                         IF($getparam['Laporan']['Tgl_1']){
                             $query->andWhere('tetap_tanggal >= "'.$getparam['Laporan']['Tgl_1'].'" AND tetap_tanggal <= "'.$getparam['Laporan']['Tgl_2'].'"');
                         }
-                        $data = $query;
+                        $data = $query->all();
                         $render = 'cetaklaporan2';
                         break;                    
                     default:

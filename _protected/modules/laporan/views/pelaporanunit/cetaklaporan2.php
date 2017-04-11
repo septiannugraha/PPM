@@ -164,18 +164,6 @@ $pdf->Cell($w['4'],11,'Jam PPM','LTR',0,'C');
 
 $pdf->ln();
 
-$pdf->SetFont('Arial','B',10);
-$pdf->SetXY($left,$pdf->getY());
-$pdf->Cell($w['0'],11,' ','LTB',0,'C');
-$pdf->Cell($w['1'],11,'  ','LTRB',0,'C');
-$pdf->Cell($w['2'],11,'  ','LTRB',0,'C');
-$pdf->Cell($w['3'],11,'  ','LTRB',0,'C');
-$pdf->Cell($w['4'],11,'  ','LTRB',0,'C');
-
-$pdf->ln();
-
-
-
 
 // Prepare variabel for our loop
 $y1 = $pdf->GetY(); // Untuk baris berikutnya
@@ -186,6 +174,46 @@ $x = 15;
 $angker = NULL;
 $i = 1;
 
+
+foreach($data as $data){
+
+
+    $y = MAX($y1, $y2, $y3);
+
+
+    //new data
+    $pdf->SetFont('Arial','',10);    
+    $pdf->SetXY($x, $y);
+    $xcurrent= $x;
+    $pdf->MultiCell($w['0'],11,$i,'LT','C');
+    $xcurrent = $xcurrent+$w['0'];
+    $pdf->SetXY($xcurrent, $y);
+    $pdf->MultiCell($w['1'],11,$data['tentang'],'LTR','L');
+    $xcurrent = $xcurrent+$w['1'];
+    $pdf->SetXY($xcurrent, $y);
+    $pdf->MultiCell($w['2'],11,$data['no'],'LTR','L');
+    $y1 = $pdf->GetY(); //berikan nilai untuk $y1 titik terbawah Uraian Kegiatan    
+    $xcurrent = $xcurrent+$w['2'];
+    $pdf->SetXY($xcurrent, $y);
+    $pdf->MultiCell($w['3'],11,$data['tetap_tanggal'] ,'LTR','C');
+    $xcurrent = $xcurrent+$w['3'];
+    $pdf->SetXY($xcurrent, $y);
+    $pdf->MultiCell($w['4'],11,$data['peran']['name'] ,'LTR','C');
+    $y2 = $pdf->GetY(); //berikan nilai untuk $y1 titik terbawah Uraian Kegiatan
+    $xcurrent = $xcurrent+$w['4'];
+    $pdf->SetXY($xcurrent, $y);
+    $xcurrent = $xcurrent+$w['4'];
+    $pdf->SetXY($xcurrent, $y);
+
+    
+    $angker = $angker+$data['peran']['bobot_kredit'];
+
+    
+    $ysisa = $y;
+
+    $i++; //Untuk urutan nomor
+    $pdf->ln();
+}
 // Here our loop
 
 //foreach($data as $data){
@@ -209,11 +237,11 @@ $i = 1;
 //Menampilkan jumlah halaman terakhir
 $pdf->SetFont('Arial','B',10);
 $pdf->setxy($left,$pdf->getY());
-$pdf->Cell($w['0'],6,'','LB');
-$pdf->Cell($w['1'],6,'','B',0,'C');
-$pdf->Cell($w['2'],6,'','B',0,'C');
-$pdf->Cell($w['3'],6,'JUMLAH','B',0,'C');
-$pdf->Cell($w['4'],6,number_format($angker, 3, ',', '.'),'BR',0,'R');
+$pdf->Cell($w['0'],6,'','LTB');
+$pdf->Cell($w['1'],6,'','TB',0,'C');
+$pdf->Cell($w['2'],6,'','TB',0,'C');
+$pdf->Cell($w['3'],6,'JUMLAH','TB',0,'C');
+$pdf->Cell($w['4'],6,number_format($angker, 3, ',', '.'),'LTBR',0,'R');
 // $pdf->Cell($w['5'],6,'','BR',0,'C');
 
 $pdf->ln();
