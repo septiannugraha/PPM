@@ -126,15 +126,15 @@ $left = 25;
 // Your Code GOES HERE -----------------------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------------------------------------
 $pdf->SetXY(10,10);
-$pdf->SetFont('Arial','B',15); 
+$pdf->SetFont('Arial','B',13); 
 $pdf->MultiCell(300,18,'DAFTAR KEGIATAN PPM', '', 'C', 0);
 
 $pdf->SetXY(10,17);
-$pdf->SetFont('Arial','B',15); 
+$pdf->SetFont('Arial','B',13); 
 $pdf->MultiCell(300,18, 'BAGIAN PERENCANAAN DAN PENGEMBANGAN PEGAWAI', '', 'C', 0);
 
 $pdf->SetXY(10,24);
-$pdf->SetFont('Arial','B',15); 
+$pdf->SetFont('Arial','B',13); 
 $pdf->MultiCell(300,18, 'TRIWULAN I TAHUN 2017', '', 'C', 0);
 
 IF($pdf->GetY() <= 35){
@@ -148,22 +148,47 @@ $pdf->setXY($left, $pdf->getY()+6);
 $pdf->Cell(185,6,'Kegiatan yang diikuti:','',0,'L');
 $pdf->ln();
 
-//$pdf->Cell(40,5,'Data anda disini','',0,'L');
+// $pdf->Cell(40,5,'Data anda disini','',0,'L');
 
 // Tabel
 
-$w = [15,80,48,100,25]; // Tentukan width masing-masing kolom
- 
+
+$w = [10, 68, 33, 70, 19, 66, 19]; // Tentukan width masing-masing kolom
+$w1 = [10, 68, 33, 70, 19, 23, 23, 20, 19];
+$x = $left;
+$y = $pdf->getY();
+$x1 =  $x + $w['0'] + $w['1'] + $w['2'] + $w['3'] + $w['4'];
+
 $pdf->SetFont('Arial','B',10);
-$pdf->SetXY($left,$pdf->getY());
-$pdf->Cell($w['0'],11,'No','LT',0,'C');
-$pdf->Cell($w['1'],11,'Materi PPM','LTR',0,'C');
-$pdf->Cell($w['2'],11,'Tanggal','LTR',0,'C');
-$pdf->Cell($w['3'],11,'Hasil Output yang diharapkan','LTR',0,'C');
-$pdf->Cell($w['4'],11,'Jam PPM','LTR',0,'C');
-
-$pdf->ln();
-
+$pdf->SetXY($x,$y);
+$pdf->MultiCell($w['0'],19.5,'No','LT','C');
+$xcurrent= $x+$w['0'];
+$pdf->SetXY($xcurrent, $y);
+$pdf->MultiCell($w['1'],19.5,'Materi PPM','LT','C');
+$xcurrent = $xcurrent+$w['1'];
+$pdf->SetXY($xcurrent, $y);
+$pdf->MultiCell($w['2'],19.5,'Tanggal','LT','C');
+$xcurrent = $xcurrent+$w['2'];
+$pdf->SetXY($xcurrent, $y);
+$pdf->MultiCell($w['3'],19.5,'Hasil Output yang diharapkan','LT','C');
+$xcurrent = $xcurrent+$w['3'];
+$pdf->SetXY($xcurrent, $y);
+$pdf->MultiCell($w['4'],19.5,'Jam PPM','LTR','C');    
+$xcurrent = $xcurrent+$w['4'];
+$pdf->SetXY($xcurrent, $y);
+$pdf->MultiCell($w['5'],6,'Peserta','T','C');
+$y1 = $pdf->getY();
+$pdf->SetXY($x1, $y1);
+$pdf->MultiCell($w1['5'],4.5,'Struktural/ Fungsional Tertentu','LT','C');
+$xcurrent1 = $x1+$w1['5'];
+$pdf->SetXY($xcurrent1, $y1);
+$pdf->MultiCell($w1['6'],6.75,'Fungsional Umum','LT','C');
+$xcurrent1 = $xcurrent1+$w1['6'];
+$pdf->SetXY($xcurrent1, $y1);
+$pdf->MultiCell($w1['7'],13.5,'Jumlah','LT','C');
+$xcurrent = $xcurrent+$w['5'];
+$pdf->SetXY($xcurrent, $y);
+$pdf->MultiCell($w['6'],9.5,'Total Jam PPM','LTR','C');
 
 // Prepare variabel for our loop
 $y1 = $pdf->GetY(); // Untuk baris berikutnya
@@ -171,42 +196,34 @@ $y2 = $pdf->GetY(); //untuk baris berikutnya
 $y3 = $pdf->GetY(); //untuk baris berikutnya
 $yst = $pdf->GetY(); //untuk Y pertama sebagai awal rectangle
 $x = 15;
-$angker = NULL;
+$jam = NULL;
 $i = 1;
-
 
 foreach($data as $data){
 
-
     $y = MAX($y1, $y2, $y3);
-
 
     //new data
     $pdf->SetFont('Arial','',10);    
     $pdf->SetXY($x, $y);
     $xcurrent= $x;
-    $pdf->MultiCell($w['0'],11,$i,'LT','C');
-    $xcurrent = $xcurrent+$w['0'];
+    $pdf->MultiCell($w1['0'],11,$i,'LT','C');
+    $xcurrent = $xcurrent+$w1['0'];
     $pdf->SetXY($xcurrent, $y);
-    $pdf->MultiCell($w['1'],11,$data['tentang'],'LTR','L');
-    $xcurrent = $xcurrent+$w['1'];
+    $pdf->MultiCell($w1['1'],11,$data['tentang'],'LTR','L');
+    $xcurrent = $xcurrent+$w1['1'];
     $pdf->SetXY($xcurrent, $y);
-    $pdf->MultiCell($w['2'],11,$data['no'],'LTR','L');
+    $pdf->MultiCell($w1['2'],11,$data['no'],'LTR','L');
     $y1 = $pdf->GetY(); //berikan nilai untuk $y1 titik terbawah Uraian Kegiatan    
-    $xcurrent = $xcurrent+$w['2'];
+    $xcurrent = $xcurrent+$w1['2'];
     $pdf->SetXY($xcurrent, $y);
-    $pdf->MultiCell($w['3'],11,$data['tetap_tanggal'] ,'LTR','C');
-    $xcurrent = $xcurrent+$w['3'];
+    $pdf->MultiCell($w1['3'],11,$data['tetap_tanggal'] ,'LTR','C');
+    $xcurrent = $xcurrent+$w1['3'];
     $pdf->SetXY($xcurrent, $y);
-    $pdf->MultiCell($w['4'],11,$data['peran']['name'] ,'LTR','C');
+    $pdf->MultiCell($w1['4'],11,$data['peran']['name'] ,'LTR','C');
     $y2 = $pdf->GetY(); //berikan nilai untuk $y1 titik terbawah Uraian Kegiatan
-    $xcurrent = $xcurrent+$w['4'];
+    $xcurrent = $xcurrent+$w1['4'];
     $pdf->SetXY($xcurrent, $y);
-    $xcurrent = $xcurrent+$w['4'];
-    $pdf->SetXY($xcurrent, $y);
-
-    
-    $angker = $angker+$data['peran']['bobot_kredit'];
 
     
     $ysisa = $y;
@@ -214,40 +231,27 @@ foreach($data as $data){
     $i++; //Untuk urutan nomor
     $pdf->ln();
 }
-// Here our loop
 
-//foreach($data as $data){
-
-
-  //  $y = MAX($y1, $y2, $y3);
-
-
-    //new data
-
-    
-    //$angker = $angker+$data['peran']['bobot_kredit'];
-
-    
-//    $ysisa = $y;
-
-  //  $i++; //Untuk urutan nomor
-    //$pdf->ln();
-//}
 
 //Menampilkan jumlah halaman terakhir
+$jam = (new \yii\db\Query())
+->from('ppud')
+->count('puud');
+
 $pdf->SetFont('Arial','B',10);
 $pdf->setxy($left,$pdf->getY());
-$pdf->Cell($w['0'],6,'','LTB');
-$pdf->Cell($w['1'],6,'','TB',0,'C');
-$pdf->Cell($w['2'],6,'','TB',0,'C');
-$pdf->Cell($w['3'],6,'JUMLAH','TB',0,'C');
-$pdf->Cell($w['4'],6,number_format($angker, 3, ',', '.'),'LTBR',0,'R');
-// $pdf->Cell($w['5'],6,'','BR',0,'C');
+$pdf->Cell($w1['0'],6,'','LTB');
+$pdf->Cell($w1['1'],6,'','TB',0,'C');
+$pdf->Cell($w1['2'],6,'','TB',0,'C');
+$pdf->Cell($w1['3'],6,'SUB JUMLAH','TB',0,'C');
+$pdf->Cell($w1['4'],6,number_format($jam, 3, ',', '.'),'LTBR',0,'R');
+$pdf->Cell($w1['5'],6,number_format($jam/3, 3, ',', '.'),'TBR',0,'C');
+$pdf->Cell($w1['6'],6,number_format($jam/3, 3, ',', '.'),'TBR',0,'C');
+$pdf->Cell($w1['7'],6,number_format($jam/3, 3, ',', '.'),'TBR',0,'C');  
+$pdf->Cell($w1['8'],6,number_format($jam, 3, ',', '.'),'TBR',0,'C');
 
 $pdf->ln();
 
-
-$pdf->ln();
 
 // Penandatangan 
 
