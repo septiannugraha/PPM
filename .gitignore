@@ -32,3 +32,9 @@ composer.phar
 phpunit.phar
 # local phpunit config
 /phpunit.xml
+
+_protected/runtime/cache/
+
+_protected/runtime/session/
+
+_protected/runtime/debug/
