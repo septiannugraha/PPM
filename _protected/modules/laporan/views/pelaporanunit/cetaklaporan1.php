@@ -135,7 +135,7 @@ $pdf->MultiCell(155,18,'BADAN PENGAWASAN KEUANGAN DAN PEMBANGUNAN', '', 'C', 0);
 
 $pdf->SetXY(45,25);
 $pdf->SetFont('Arial','B',15); 
-$pdf->MultiCell(155,7,isset(Yii::$app->user->identity->kode_unit) ? ': '.strtoupper($data2->nama_unit) : 'BUKAN USER UNIT', '', 'C', 0);
+$pdf->MultiCell(155,7,isset(Yii::$app->user->identity->kode_unit) ? strtoupper($data2->nama_unit) : 'BUKAN USER UNIT', '', 'C', 0);
 
 IF($pdf->GetY() <= 35){
     $y = 35;
@@ -217,6 +217,43 @@ foreach($data as $data){
 
 
     $y = MAX($y1, $y2, $y3);
+
+	    IF($y1 + (4*(strlen($data['ppm']['tentang'])/23)) > 160){ //cek pagebreak
+	        $ylst = 190 - $yst; //207 batas margin bawah dikurang dengan y pertama
+	        //setiap selesai page maka buat rectangle
+            $pdf->Rect($x, $yst, $w['0'] ,$ylst);
+            $pdf->Rect($x+$w['0'], $yst, $w['1'] ,$ylst);
+            $pdf->Rect($x+$w['0']+$w['1'], $yst, $w['2'] ,$ylst);
+            $pdf->Rect($x+$w['0']+$w['1']+$w['2'], $yst, $w['3'] ,$ylst);
+            $pdf->Rect($x+$w['0']+$w['1']+$w['2']+$w['3'], $yst, $w['4'] ,$ylst);
+            $pdf->Rect($x+$w['0']+$w['1']+$w['2']+$w['3']+$w['4'], $yst, $w['5'] ,$ylst);
+            // $pdf->Rect($x+$w['0']+$w['1']+$w['2']+$w['3']+$w['4']+$w['5'], $yst ,$w['6'],$ylst);
+	        
+	        //setelah buat rectangle baru kemudian addPage
+	        $pdf->AddPage();
+
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY($left,$pdf->getY());
+            $pdf->Cell($w['0'],11,'NO','LT',0,'C');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->Cell($w['1'],11,'Uraian Kegiatan','LTR',0,'C');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->Cell($w['2'],11,'No Kegiatan','LTR',0,'C');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->Cell($w['3'],11,'Tanggal','LTR',0,'C');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->Cell($w['4'],11,'Partisipasi','LTR',0,'C');
+            $pdf->Cell($w['5'],11,'Angka Kredit','LTR',0,'C');
+            $pdf->ln();
+            
+	        $y1 = $pdf->GetY(); // Untuk baris berikutnya
+	        $y2 = $pdf->GetY(); //untuk baris berikutnya
+	        $y3 = $pdf->GetY(); //untuk baris berikutnya
+	        $yst = $pdf->GetY(); //untuk Y pertama sebagai awal rectangle
+	        $x = 15;
+	        $ysisa = $y1;
+
+	    }
 
 
     //new data

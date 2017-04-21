@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "51a12eebdfd11b2688c3b30a0846b288",
-    "content-hash": "64e728c18d36885c8610f55c8b733f34",
+    "hash": "ef9ee076ea8bcfe67428d4771d915bb1",
+    "content-hash": "d8aab6572189ba46ee2f88305250eeb1",
     "packages": [
         {
             "name": "2amigos/yii2-multi-select-widget",
@@ -452,6 +452,54 @@
                 "markdown-extra"
             ],
             "time": "2016-09-14 20:40:20"
+        },
+        {
+            "name": "edgardmessias/yii2-ibm-db2",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/edgardmessias/yii2-ibm-db2.git",
+                "reference": "4792f7e2088b40238a0bf6e38340deafdceaa94e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/edgardmessias/yii2-ibm-db2/zipball/4792f7e2088b40238a0bf6e38340deafdceaa94e",
+                "reference": "4792f7e2088b40238a0bf6e38340deafdceaa94e",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.8"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.5",
+                "yiisoft/yii2-dev": "2.0.8"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "edgardmessias\\db\\ibm\\db2\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Edgard Messias",
+                    "email": "edgardmessias@gmail.com"
+                }
+            ],
+            "description": "IBM DB2 Driver for Yii2 Framework.",
+            "keywords": [
+                "activerecord",
+                "db2",
+                "extension",
+                "ibm",
+                "ibm db2",
+                "yii2"
+            ],
+            "time": "2016-05-03 20:13:37"
         },
         {
             "name": "ezyang/htmlpurifier",

@@ -41,7 +41,7 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left"><?= Yii::$app->name ?> &copy; Renbang BPKP <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Html::a('<i class="fa fa-envelope"></i> @hoaaah', 'mailto:heru@belajararief.com', [
+        <p class="pull-right"><?= Html::a('<i class="fa fa-envelope"></i> Contact Us', 'mailto:heru@belajararief.com', [
             'class' => 'btn btn-sm btn-default',
         ]) ?></p>
     </div>

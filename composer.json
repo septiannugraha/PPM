@@ -26,7 +26,8 @@
 		"yii2assets/yii2-pdfjs": "^1.0",
 		"wahyugnc/yii2-pdfjs": "*",
         "itbz/fpdf": "dev-master",
-		"kartik-v/yii2-field-range": "*"
+		"kartik-v/yii2-field-range": "*",
+		"edgardmessias/yii2-ibm-db2": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
